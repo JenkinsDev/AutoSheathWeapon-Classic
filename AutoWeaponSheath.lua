@@ -48,9 +48,6 @@ v1 global cancel animation. Bug prone due to race-conditions
 v2 simplified approach?
 --]]
 
--- track if we should cancel the interval-esqueue flow of `sheath` invocations
-local cancel = false
-
 local function sheath()
 	local isSheathed = GetSheathState() == 1
 	if not isSheathed then
@@ -78,7 +75,6 @@ function Addon:LOOT_CLOSED()
 	-- the weapon is not automatically sheathed
 	local infight = UnitAffectingCombat("player")
 	if not infight then
-		cancel = false
 		sheath()
 	end
 	
